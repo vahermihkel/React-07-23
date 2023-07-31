@@ -27,3 +27,20 @@
   background-color: rgb(165, 64, 64);
   text-decoration: underline;
 }
+
+.kuldne {
+  color: goldenrod;
+}
+
+.tume-leht {
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+  /* min-height: 100%;
+  min-height: 100px; */
+}
+
+.hele-leht {
+  background-color: aliceblue;
+  min-height: 100vh;
+}
