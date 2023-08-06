@@ -7,6 +7,9 @@ import Ostukorv from './pages/Ostukorv';
 import Seaded from './pages/Seaded';
 import { useState } from 'react';
 import MitteLeitud from './pages/MitteLeitud';
+import Hinnad from './pages/Hinnad';
+import Poed from './pages/Poed';
+import Tooted from './pages/Tooted';
 
 function App() {
   const [teema, uuendaTeema] = useState(localStorage.getItem("teema"));
@@ -48,11 +51,26 @@ function App() {
         <button className="nupp">Seaded</button>
       </Link>
 
+      <Link to="/hinnad">
+        <button className="nupp">hinnad</button>
+      </Link>
+
+      <Link to="/poed">
+        <button className="nupp">poed</button>
+      </Link>
+
+      <Link to="/tooted">
+        <button className="nupp">tooted</button>
+      </Link>
+
       <Routes>
         <Route path="" element={ <Avaleht /> } />
         <Route path="lisa-toode" element={ <LisaToode /> } />
         <Route path="ostukorv" element={ <Ostukorv /> } />
         <Route path="settings" element={ <Seaded /> } />
+        <Route path="hinnad" element={ <Hinnad /> } />
+        <Route path="poed" element={ <Poed /> } />
+        <Route path="tooted" element={ <Tooted /> } />
         <Route path="*" element={ <MitteLeitud /> } />
       </Routes>
 

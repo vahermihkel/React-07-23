@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Ostukorv() {
+  const [ostukorv, uuendaOstukorv] = useState(["Coca cola", "Fanta", "Sprite"]);
+
+  // ostukorvi lisamine
+
+  // ostukorvist kustutamist
+
+  // ostukorvi tühjendamine
+
   return (
     <div>
+      {ostukorv.map(toode => <div>{toode}</div>)}
+      {/* dünaamika: mingil juhul on märge ostukorv on tühi, mingil juhul pole */}
       <div>Ostukorv on tühi</div>
       <Link to="/lisa-toode">Tooteid lisama</Link>
     </div>
