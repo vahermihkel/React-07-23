@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import poedFailist from "../data/poed.json";
 
-function Poed() {                   //     0          1       2            3
-  const [poed, uuendaPoed] = useState(["Ülemiste", "Ämari","Viimsi", "Rocca al Mare", "Magistrali", "Vesse", "Kristiine", "Järveotsa"]);
+function Poed() {              
+  const [poed, uuendaPoed] = useState(poedFailist);
+  const poodViide = useRef(); // useRef-st ka import       priceRef       nameRef     descriptionRef
 
   const reset = () => {
-    uuendaPoed(["Ülemiste", "Ämari","Viimsi", "Rocca al Mare", "Magistrali", "Vesse", "Kristiine", "Järveotsa"]);
+    uuendaPoed(poedFailist);
   }
 
   const sorteeriAZ = () => {
@@ -61,11 +63,28 @@ function Poed() {                   //     0          1       2            3
   }
 
   // KOKKUARVUTUS - liidame kõik poodide tähed kokku
+  const arvutaKokku = () => {
+    let summa = 0;
+    poed.forEach(yksPood => summa = summa + yksPood.length);
+    return summa;
+  }
+
+  const lisa = () => {
+    poed.push(poodViide.current.value);
+    uuendaPoed(poed.slice());
+  }
 
   return (
     <div>
       <button onClick={reset}>Reset</button>
       <div>Poode: {poed.length} tk</div>
+      <div>Tähemärke: {arvutaKokku()}</div>
+
+      <br />
+      <label>Poe nimi</label> <br />
+      <input ref={poodViide} type="text" /> <br />
+      <button onClick={lisa}>Lisa</button> <br /><br />
+
       <button onClick={sorteeriAZ}>Sorteeri A-Z</button>
       <button onClick={sorteeriZA}>Sorteeri Z-A</button>
       <button onClick={sorteeriTahtedeArvKasv}>Sorteeri tähtede arv kasvavalt</button>

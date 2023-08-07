@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css'; // meie CSS peab olema allpool kui moodulite CSS-d
+// let summa = 0;
+// summa = 10;
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 

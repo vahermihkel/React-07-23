@@ -26,9 +26,9 @@ function Seaded() {           // OR operator
 
   return (
     <div>
-      <button onClick={keelEst}> Eesti keelseks</button>
-      <button onClick={keelEng}>To English</button>
-      <button onClick={keelRus}>Pycckuj</button>
+      { keel !== "est" && <button onClick={keelEst}> Eesti keelseks</button>}
+      { keel !== "eng" && <button onClick={keelEng}>To English</button>}
+      { keel !== "rus" && <button onClick={keelRus}>Pycckuj</button>}
       { keel === "est" && <div>Leht on eesti keelne</div>}
       { keel === "eng" && <div>Page is in English</div>}
       { keel === "rus" && <div>Pycckij jasõk</div>}
