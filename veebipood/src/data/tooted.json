@@ -1,1 +1,5 @@
-["BMW", "Nobe", "Tesla"]
+[
+  {"nimi": "BMW", "hind": 25000, "pilt": "https://cars.usnews.com/static/images/Auto/izmo/i159615491/2023_bmw_2_series_angularfront.jpg", "aktiivne": true}, 
+  {"nimi": "Nobe", "hind": 35000, "pilt": "https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg", "aktiivne": true}, 
+  {"nimi": "Tesla", "hind": 75000, "pilt": "https://upload.wikimedia.org/wikipedia/commons/8/82/Tesla_Model_S_%28Facelift_ab_04-2016%29_trimmed.jpg", "aktiivne": true}
+]
