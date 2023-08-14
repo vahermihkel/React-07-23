@@ -23,11 +23,18 @@ function Ostukorv() {
     uuendaOstukorv(ostukorv.slice()); // slice tegi mälukoha kaotuse ehk koopia
   };
 
+  const arvutaOstukorviKogusumma = () => {
+    let summa = 0;
+    ostukorv.forEach(toode => summa = summa + toode.hind);
+    return summa;
+  }
+
   return (
     <div>
-      <button onClick={tyhjenda}>Tühjenda</button>
-      {ostukorv.map((toode, jrknr) => (
-        <div>
+      { ostukorv.length > 0 && <button onClick={tyhjenda}>Tühjenda</button> }
+      { ostukorv.length > 0 && <div>Ostukorvis on {ostukorv.length} toodet</div> }
+      { ostukorv.map((toode, jrknr) => (
+        <div key={jrknr}>
           {jrknr}
           <div>{toode.nimi}</div>
           <div>{toode.hind} €</div>
@@ -37,12 +44,13 @@ function Ostukorv() {
         </div>
       ))}
       {/* dünaamika: mingil juhul on märge ostukorv on tühi, mingil juhul pole */}
-      {ostukorv.length === 0 && (
+      { ostukorv.length === 0 && (
         <>
           <div>Ostukorv on tühi</div>
           <Link to="/tooted">Tooteid lisama</Link>
         </>
       )}
+      { ostukorv.length > 0 && <div>Kogusumma: {arvutaOstukorviKogusumma()} €</div> }
     </div>
   );
 }

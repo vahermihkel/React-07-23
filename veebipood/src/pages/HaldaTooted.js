@@ -13,7 +13,7 @@ function HaldaTooted() {
   return (
     <div>
       {tooted.map((toode, jrknr) => (
-        <div>
+        <div key={toode.nimi} className={toode.aktiivne === true ? "aktiivne" : "mitteaktiivne"}>
           {jrknr} 
           <div>{toode.nimi}</div>
           <div>{toode.hind}</div>

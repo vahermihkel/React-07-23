@@ -33,7 +33,7 @@ function Hinnad() {
     <div>
       <button onClick={sorteeri}>Sorteeri</button>
       <button onClick={filtreeri}>Filtreeri</button>
-      {hinnad.map(hind => <div>Maksumus: {hind} €</div> )}
+      {hinnad.map(hind => <div key={hind}>Maksumus: {hind} €</div> )}
       <div>Kokku: {arvutaKokku()} €</div>
     </div>
   )

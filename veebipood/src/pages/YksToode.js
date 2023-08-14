@@ -7,10 +7,15 @@ function YksToode() {
   //      mulle ette antakse (useState poolt)
   // const [kogus, uuendaKogus]
   // kui on loogelised, siis võib olla mitu tükki tahes
-  const {jrknr} = useParams(); // URLs localhost:3000/pilt/101
+  const {nimi} = useParams(); // URLs localhost:3000/pilt/101
   // const {id, name} = useSearchParams(); localhost:3000/pilt?id=101&name=pildike
-  const leitud = tootedFailist[jrknr];
+  const leitud = tootedFailist.find(toode => toode.nimi === nimi);
+  // järjekorranumbri alusel otsimine: tootedFailist[jrknr];
   // undefined
+  // const yksLeitud = tootedFailist.find(toode => toode.nimi === nimi); --> {"nimi": ""}
+  // const leituteArray = tootedFailist.filter(toode => toode.nimi === nimi); --> [{"nimi": ""},{"nimi": ""}]
+  // const index = tootedFailist.findIndex(toode => toode.nimi === nimi); --> 0
+
 
   if (leitud === undefined) {
     return <div>Toodet ei leitud!</div>
@@ -18,7 +23,7 @@ function YksToode() {
 
   return (
     <div>
-      <div>Toote järjekorranumber: {jrknr}</div>
+      {/* <div>Toote järjekorranumber: {jrknr}</div> */}
       <div>Toote nimi: {leitud.nimi}</div>
       <div>Toote hind: {leitud.hind}</div>
       <div>Toote kirjeldus: ....</div>

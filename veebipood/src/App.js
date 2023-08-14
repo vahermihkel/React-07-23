@@ -13,6 +13,7 @@ import Tooted from './pages/Tooted';
 import HaldaTooted from './pages/HaldaTooted';
 import MuudaToode from './pages/MuudaToode';
 import YksToode from './pages/YksToode';
+import YksikPood from './pages/YksPood';
 
 function App() {
   const [teema, uuendaTeema] = useState(localStorage.getItem("teema"));
@@ -80,7 +81,8 @@ function App() {
         <Route path="tooted" element={ <Tooted /> } />
         <Route path="halda" element={ <HaldaTooted /> } />
         <Route path="muuda/:index" element={ <MuudaToode /> } />
-        <Route path="toode/:jrknr" element={ <YksToode /> } />
+        <Route path="toode/:nimi" element={ <YksToode /> } />
+        <Route path="pood/:index" element={ <YksikPood /> } />
         <Route path="*" element={ <MitteLeitud /> } />
       </Routes>
 
@@ -89,3 +91,11 @@ function App() {
 }
 
 export default App;
+
+// 1. MuudaToode objekti kujule
+// 2. Key errori lahendamine
+// 3. Ostukorvi kogusumma
+// 4. Toote aktiivsus kasutusele
+// 5. Avalehel sorteerimine
+// 6. URLst saadame nime
+// 7. Avalehel filtreerimine

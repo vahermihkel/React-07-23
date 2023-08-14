@@ -1,5 +1,11 @@
 [
+  {"nimi": "Audi", "hind": 200000,"pilt": "https://img12.img-bcg.eu/auto24/photo_series/770/992/76466992.jpg", "aktiivne": true },
+  {"nimi": "Aston Martin", "hind": 200000,"pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true },
   {"nimi": "BMW", "hind": 25000, "pilt": "https://cars.usnews.com/static/images/Auto/izmo/i159615491/2023_bmw_2_series_angularfront.jpg", "aktiivne": true}, 
-  {"nimi": "Nobe", "hind": 35000, "pilt": "https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg", "aktiivne": true}, 
-  {"nimi": "Tesla", "hind": 75000, "pilt": "https://upload.wikimedia.org/wikipedia/commons/8/82/Tesla_Model_S_%28Facelift_ab_04-2016%29_trimmed.jpg", "aktiivne": true}
+  {"nimi": "Bentley", "hind": 55000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}, 
+  {"nimi": "Nobe", "hind": 35000, "pilt": "https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg", "aktiivne": false}, 
+  {"nimi": "Nissan", "hind": 15000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}, 
+  {"nimi": "Nord Star", "hind": 150000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}, 
+  {"nimi": "Tesla", "hind": 75000, "pilt": "https://upload.wikimedia.org/wikipedia/commons/8/82/Tesla_Model_S_%28Facelift_ab_04-2016%29_trimmed.jpg", "aktiivne": true},
+  {"nimi": "Toyota", "hind": 45000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}
 ]
