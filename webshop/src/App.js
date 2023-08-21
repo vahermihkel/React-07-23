@@ -47,8 +47,10 @@ function App() {
               <Nav.Link as={Link} to="/shops">{t("shops")}</Nav.Link>
             </Nav>
             <Nav>
-              <button onClick={changeLangEN}>english</button>
-              <button onClick={changeLangEE}>estonian</button>
+              <Nav.Link>
+                <img className="lang" onClick={changeLangEN} src="/english.png" alt="" />
+                <img className="lang" onClick={changeLangEE} src="/estonian.png" alt="" />
+              </Nav.Link>
               <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
               <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>
             </Nav>
@@ -61,7 +63,7 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="contact" element={<ContactUs />} />
         <Route path="shops" element={<Shops />} />
-        <Route path="product" element={<SingleProduct />} />
+        <Route path="product/:productId" element={<SingleProduct />} />
         <Route path="admin" element={<AdminHome />} />
         <Route path="admin/add-product" element={<AddProduct />} />
         <Route path="admin/edit-product/:productId" element={<EditProduct />} />
@@ -103,3 +105,23 @@ export default App;
 //          2-3 kuu pärast on vaja uuesti teha
 //          1h-2h et see peale panna kui on juba korra oma peaga läbi tehtud
 // 7. React-toastify peale: kustutades, uut toodet lisades, ostukorvi lisades
+
+
+// 1. 3-4s keel, chatgpt/openai alusel tõlkida
+// 2. AddProducts.js - ID unikaalsuse kontroll
+
+// 23.08:
+// Poed: Leaflet
+// Kontaktivorm: EmailJS
+// Ostukorvis salvestamise localStorage
+
+// 28.08
+// Ostukorvis kogused
+// Ostukorvis kujundus
+// Pakiautomaatide võtmine
+
+// 30.08
+// Andmebaas
+
+// 04.09
+// Makse - EveryPay
