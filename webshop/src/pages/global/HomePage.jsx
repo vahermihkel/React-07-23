@@ -4,9 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import productsFromFile from "../../data/products.json"
-import cartFromFile from "../../data/cart.json"
- 
- 
+// import cartFromFile from "../../data/cart.json"
  
 function HomePage () {                        // .filter(product => product.active === true)
   const [products, setProducts] = useState(productsFromFile);
@@ -52,9 +50,28 @@ function HomePage () {                        // .filter(product => product.acti
   }
  
   const addCart = (chosenProduct) => {
-    cartFromFile.push(chosenProduct);
-    toast.success(t("itemAddedToCart"))
+    // "[{},{}]"   --->  [{},{}]
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push(chosenProduct);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success(t("itemAddedToCart"));
+    // cartFromFile.push(chosenProduct);
     // setProducts(productsFromFile.slice())
+    // localStorage.getItem("keel")
+    // localStorage.setItem("keel", "eng");
+    // localStorage.setItem("keel", "est");
+    // localStorage.setItem("keel", "rus");
+
+    // localStorage.getItem("teema")
+    // localStorage.setItem("teema", "dark");
+    // localStorage.setItem("teema", "light");
+    // localStorage.setItem("teema", "colored");
+
+    // 1. Võtame LocalStorage-st ostukorvi varasema seisu: localStorage.getItem()
+    // 2. Võtame LocalStorage-st saadud väärtustelt jutumärgid maha: JSON.parse()
+    // 3. Lisame saadud väärtusele juurde ühe toote: .push()
+    // 4. Paneme uuenenud väärtusele jutumärgid tagasi peale: JSON.stringify()
+    // 5. Paneme LocalStorage-sse tagasi: localStorage.setItem()
   }
  
   return (

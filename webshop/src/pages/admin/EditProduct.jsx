@@ -56,13 +56,12 @@ function EditProduct() {
   const [idUnique, setIdUnique] = useState(true);
 
   const checkIdUniqueness = () => {
+    if (idRef.current.value === productId) {
+      setIdUnique(true);
+      return;
+    }
     const index = productsFromFile.findIndex(product => product.id === Number(idRef.current.value));
-    // const product = productsFromFile.find(product => product.id === Number(idRef.current.value));
-    // const result = productsFromFile.filter(product => product.id === Number(idRef.current.value));
-
-    // if (result.length === 0) {
-    // if (product === undefined) {
-    if (index === -1) { // KUI seda toodet pole, aga otsitakse järjekorranumbrit, siis index on -1
+    if (index === -1) {
       setIdUnique(true);
     } else {
       setIdUnique(false);

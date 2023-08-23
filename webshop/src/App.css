@@ -31,3 +31,23 @@ input:focus {
   outline: none !important;
   border: 2px solid red;
 }
+
+.map {
+  height: 300px;
+  margin: 5%;
+  border-radius: 10px;
+}
+
+.active {
+  border: 1px solid green;
+  background-color: rgb(235, 240, 235);
+}
+
+.inactive {
+  border: 1px solid red;
+  background-color: rgb(247, 240, 240);
+}
+
+.active, .inactive {
+  margin: 5px;
+}

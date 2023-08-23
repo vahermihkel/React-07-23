@@ -14,7 +14,7 @@ import MaintainProducts from "./pages/admin/MaintainProducts";
 import MaintainShops from "./pages/admin/MaintainShops";
 import HomePage from "./pages/global/HomePage";
 import Cart from "./pages/global/Cart";
-import ContactUs from "./pages/global/ContactUs";
+import { ContactUs } from "./pages/global/ContactUs";
 import Shops from "./pages/global/Shops";
 import SingleProduct from "./pages/global/SingleProduct";
 import Login from "./pages/auth/Login";
