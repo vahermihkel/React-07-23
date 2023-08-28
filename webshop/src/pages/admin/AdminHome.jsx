@@ -8,10 +8,10 @@ function AdminHome() {
 
   return (
     <div>
-      <Button as={Link} to="/admin/maintain-categories" variant="primary">{t("maintain-categories")}</Button>{' '}
-      <Button as={Link} to="/admin/maintain-shops" variant="secondary">{t("maintain-shops")}</Button>{' '}
-      <Button as={Link} to="/admin/add-product" variant="success">{t("add-product")}</Button>{' '}
-      <Button as={Link} to="/admin/maintain-products" variant="warning">{t("maintain-products")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain-categories" variant="primary">{t("admin.maintain-categories")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain-shops" variant="secondary">{t("admin.maintain-shops")}</Button>{' '}
+      <Button as={Link} to="/admin/add-product" variant="success">{t("admin.add-product")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain-products" variant="warning">{t("admin.maintain-products")}</Button>{' '}
     </div>
   )
 }

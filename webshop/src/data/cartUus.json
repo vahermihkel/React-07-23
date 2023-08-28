@@ -1,0 +1,26 @@
+[
+  {
+    "quantity": 3,
+    "product": {
+      "id": 93876610,
+      "image": "https://i.ebayimg.com/thumbs/images/g/HGkAAOSwUrZi1mMX/s-l225.webp",
+      "name": "8TB Hard Drive",
+      "price": 24.69,
+      "description": "8TB Hard Drive External Box For PS4 Internal Memory Extra Storage Data Bank #NEW",
+      "category": "memory bank",
+      "active": true
+    }
+  },
+  {
+    "kogus": 1,
+    "toode": {
+      "id": 84849872,
+      "image": "https://i.ebayimg.com/thumbs/images/g/3EMAAOSwM1deo5U5/s-l225.webp",
+      "name": "8TB Hard Drive",
+      "price": 26.17,
+      "description": "8TB Hard Drive External Storage Box For Playstation 4 PS4 Memory Data Bank FT",
+      "category": "memory bank",
+      "active": true
+    }
+  }
+]

@@ -50,28 +50,20 @@ function HomePage () {                        // .filter(product => product.acti
   }
  
   const addCart = (chosenProduct) => {
-    // "[{},{}]"   --->  [{},{}]
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    cart.push(chosenProduct);
+    // peame tuvastama, kas ta on ostukorvis või ei ole
+    const index = cart.findIndex(cartProduct => cartProduct.product.id === chosenProduct.id);
+    if (index >= 0) {
+      // peame suurendama kogust
+      cart[index].quantity = cart[index].quantity + 1;
+      // cart[index].quantity += 1;
+      // cart[index].quantity++;
+    } else {
+      cart.push({"quantity": 1,"product": chosenProduct});
+    }
+   
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success(t("itemAddedToCart"));
-    // cartFromFile.push(chosenProduct);
-    // setProducts(productsFromFile.slice())
-    // localStorage.getItem("keel")
-    // localStorage.setItem("keel", "eng");
-    // localStorage.setItem("keel", "est");
-    // localStorage.setItem("keel", "rus");
-
-    // localStorage.getItem("teema")
-    // localStorage.setItem("teema", "dark");
-    // localStorage.setItem("teema", "light");
-    // localStorage.setItem("teema", "colored");
-
-    // 1. Võtame LocalStorage-st ostukorvi varasema seisu: localStorage.getItem()
-    // 2. Võtame LocalStorage-st saadud väärtustelt jutumärgid maha: JSON.parse()
-    // 3. Lisame saadud väärtusele juurde ühe toote: .push()
-    // 4. Paneme uuenenud väärtusele jutumärgid tagasi peale: JSON.stringify()
-    // 5. Paneme LocalStorage-sse tagasi: localStorage.setItem()
   }
  
   return (
@@ -93,7 +85,7 @@ function HomePage () {                        // .filter(product => product.acti
       <div key={product.id}>
         <img src={product.image} alt="" />
         <div> {product.name} </div>
-        <div> {product.price} €</div>
+        <div> {product.price.toFixed(2)} €</div>
         <button onClick={() => addCart(product)}>{t("addCart")}</button>
         <Link to={"/product/" + product.id}>
           <button>{t("lookCloser")} </button>

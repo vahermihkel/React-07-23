@@ -1,13 +1,17 @@
 {
-  "admin": "To admin view",
-  "contact": "To contact",
-  "shops": "To shops",
-  "cart": "Cart",
-  "login": "Login here",
-  "maintain-categories": "Maintain categories",
-  "maintain-shops": "Maintain shops",
-  "add-product": "Add new product",
-  "maintain-products": "Maintain products",
+  "nav": {
+    "admin": "To admin view",
+    "contact": "To contact",
+    "shops": "To shops",
+    "cart": "Cart",
+    "login": "Login here"
+  },
+  "admin": {
+    "maintain-categories": "Maintain categories",
+    "maintain-shops": "Maintain shops",
+    "add-product": "Add new product",
+    "maintain-products": "Maintain products"
+  },
   "sortAZ" : "Sort A - Z",
   "sortZA" : "Sort Z - A",
   "sortPA" : "Sort price ascending",
