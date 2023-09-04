@@ -1,0 +1,16 @@
+td img {
+  height: 100px;
+  width: 100px;
+}
+
+td, th {
+  border: 1px solid black;
+}
+
+th {
+  background-color: lightgray;
+}
+
+table {
+  width: 100%;
+}

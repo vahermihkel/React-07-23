@@ -6,12 +6,16 @@ import { Link } from "react-router-dom";
 // import productsFromFile from "../../data/products.json"
 // import cartFromFile from "../../data/cart.json"
 import config from "../../data/config.json"; 
+import styles from "../../css/HomePage.module.css";
+import { Spinner } from 'react-bootstrap';
+// import "../../css/HomePage.module.css";
 
 function HomePage () {                        // .filter(product => product.active === true)
   const [products, setProducts] = useState([]); // väljanäidatav: 60, 240, 600, 120
   const [dbProducts, setDbProducts] = useState([]); // andmebaasist: alati 600
   const {t} = useTranslation();
   const [categories, setCategories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(config.products)
@@ -19,6 +23,7 @@ function HomePage () {                        // .filter(product => product.acti
       .then(json => {
         setProducts(json || []);
         setDbProducts(json || []);
+        setLoading(false);
       });
 
     fetch(config.categories)
@@ -101,6 +106,10 @@ function HomePage () {                        // .filter(product => product.acti
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success(t("itemAddedToCart"));
   }
+
+  if (isLoading === true) {
+    return <Spinner variant="success" />
+  }
  
   return (
     <div>
@@ -118,18 +127,20 @@ function HomePage () {                        // .filter(product => product.acti
       {categories.map(category => <button key={category.name} onClick={() => filterByCategory(category.name)}>{t(category.name)}</button>)}
       <br /> <br/>
  
-      {products.map((product) => (
-      <div key={product.id}>
-        <img src={product.image} alt="" />
-        <div> {product.name} </div>
-        <div> {product.price.toFixed(2)} €</div>
-        <button onClick={() => addCart(product)}>{t("addCart")}</button>
-        <Link to={"/product/" + product.id}>
-          <button>{t("lookCloser")} </button>
-        </Link>
+      <div className={styles.products}>
+        {products.map((product) => (
+        <div key={product.id} className={styles.product}>
+          <img src={product.image} alt="" />
+          <div className={styles.name}> {product.name} </div>
+          <div> {product.price.toFixed(2)} €</div>
+          <button onClick={() => addCart(product)}>{t("addCart")}</button>
+          <Link to={"/product/" + product.id}>
+            <button>{t("lookCloser")} </button>
+          </Link>
+        </div>
+        ))}
       </div>
- 
-      ))}
+
        <ToastContainer
         position="bottom-right"
         theme="dark"

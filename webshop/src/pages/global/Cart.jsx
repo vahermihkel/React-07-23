@@ -69,8 +69,8 @@ function Cart() {
       "order_reference": Math.random() * 9999999, // tellimuse nr
       "nonce": "a9b7f7e79n" + Math.random() * 9999999 + new Date(), // turvaelement
       "timestamp": new Date(), // turvaelement
-      "customer_url": "https://err.ee" // kuhu tagasi suunatakse
-      };
+      "customer_url": "https://react-07-23.web.app" // kuhu tagasi suunatakse
+    };
     const paymentHeaders = {
       "Authorization": "Basic ZTM2ZWI0MGY1ZWM4N2ZhMjo3YjkxYTNiOWUxYjc0NTI0YzJlOWZjMjgyZjhhYzhjZA==",
       "Content-Type": "application/json"
@@ -78,8 +78,15 @@ function Cart() {
 
     fetch(url, {method: "POST", body: JSON.stringify(paymentBody), headers: paymentHeaders})
       .then(res => res.json())
-      .then(json => console.log(json));
+      .then(json => window.location.href = json.payment_link);
   }
+
+  // 1. HTMLs:
+  // <a href />
+  // <Link>
+  // 2. const nav = useNavigate(); <--- siseseks suunamiseks
+  // nav(json.payment_link)
+  // 3. window.location.href = "https://err.ee" <--- rakendusest välja suunamiseks
 
   if (parcelMachines.length === 0) {
     return <div>Loading...</div>

@@ -126,8 +126,17 @@ export default App;
 // 04.09
 // Makse - EveryPay
 // Kujundus - HomePage kui MaintainProducts
+// CSS moodulid
 // Loader
-// Kustutamine
 //--> kodus: Nortali proovitöö
 //        Java(back-end) + Angular(front-end)
 //        täpselt identselt üle Reacti
+
+// 06.09
+// Korra uurin Nortali proovitöö osas
+// Kustutamine
+// Editimise anomaalia
+
+// Karusell-galerii Bootstrapist
+// CSS moodulite jätk
+// Komponendid
