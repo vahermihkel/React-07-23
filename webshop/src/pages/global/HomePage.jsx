@@ -1,17 +1,33 @@
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
  
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import productsFromFile from "../../data/products.json"
+// import productsFromFile from "../../data/products.json"
 // import cartFromFile from "../../data/cart.json"
- 
+import config from "../../data/config.json"; 
+
 function HomePage () {                        // .filter(product => product.active === true)
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]); // väljanäidatav: 60, 240, 600, 120
+  const [dbProducts, setDbProducts] = useState([]); // andmebaasist: alati 600
   const {t} = useTranslation();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(config.products)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json || []);
+        setDbProducts(json || []);
+      });
+
+    fetch(config.categories)
+      .then(res => res.json())
+      .then(json => setCategories(json || []));
+  }, []);
 
   const reset = () => {
-    setProducts(productsFromFile);
+    setProducts(dbProducts);
   }
  
   const sortAZ = () => {
@@ -34,19 +50,39 @@ function HomePage () {                        // .filter(product => product.acti
     setProducts(products.slice())
   }
  
-  const filterMemoryBank = () => {
-    const result = products.filter(product => product.category === "memory bank")
-    setProducts(result)
-  }
+  // const filterMemoryBank = () => {
+  //   const result = products.filter(product => product.category === "memory bank")
+  //   setProducts(result)
+  // }
  
-  const filterUSBDrive = () => {
-    const result = products.filter(product => product.category === "usb drive")
-    setProducts(result)
-  }
+  // const filterUSBDrive = () => {
+  //   const result = products.filter(product => product.category === "usb drive")
+  //   setProducts(result)
+  // }
 
-  const filterGold = () => {
-    const compare = products.filter(product => product.category.match("gold"));
-    setProducts(compare);
+  // const filterGold = () => {
+  //   const compare = products.filter(product => product.category === "gold");
+  //   setProducts(compare);
+  // }
+
+  // const filterCoin = () => {
+  //   const compare = products.filter(product => product.category === "coin");
+  //   setProducts(compare);
+  // }
+
+  // const filterGoldTester = () => {
+  //   const compare = products.filter(product => product.category === "gold tester");
+  //   setProducts(compare);
+  // }
+
+  // const filterBracelet = () => {
+  //   const compare = products.filter(product => product.category === "bracelet");
+  //   setProducts(compare);
+  // }
+
+  const filterByCategory = (categoryClicked) => {
+    const result = dbProducts.filter(product => product.category === categoryClicked);
+    setProducts(result);
   }
  
   const addCart = (chosenProduct) => {
@@ -76,9 +112,10 @@ function HomePage () {                        // .filter(product => product.acti
       <button onClick={() => sortPriceAsc()}>{t("sortPA")}</button>
       <button onClick={() => sortPriceDesc()}>{t("sortPD")}</button>
       <br /> <br />
-      <button onClick={() => filterMemoryBank()}>{t("filtMB")}</button>
-      <button onClick={() => filterUSBDrive()}>{t("filtUSBD")}</button>
-      <button onClick={() => filterGold()}>Filter gold</button>
+      {/* <button onClick={() => filterByCategory("memory bank")}>{t("memory bank")}</button>
+      <button onClick={() => filterByCategory("usb drive")}>{t("usb drive")}</button>
+      <button onClick={() => filterByCategory("gold")}>Filter gold</button> */}
+      {categories.map(category => <button key={category.name} onClick={() => filterByCategory(category.name)}>{t(category.name)}</button>)}
       <br /> <br/>
  
       {products.map((product) => (

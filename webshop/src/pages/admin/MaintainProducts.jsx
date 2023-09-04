@@ -1,23 +1,35 @@
-import { useRef, useState } from "react";
-import productsFromFile from "../../data/products.json";
+import { useEffect, useRef, useState } from "react";
+// import productsFromFile from "../../data/products.json";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
+import config from "../../data/config.json";
 
 function MaintainProducts() {
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]);
   const { t } = useTranslation();
   const searchedRef = useRef();
+  const [dbProducts, setDbProducts] = useState([]); // andmebaasist: alati 600
+
+  useEffect(() => {
+    fetch(config.products)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json || []);
+        setDbProducts(json || []);
+      });
+  }, []);
 
   const deleteProduct = (index) => {
-    productsFromFile.splice(index, 1);
+    dbProducts.splice(index, 1);
     toast.warn(t("itemRemoved"));
-    setProducts(productsFromFile.slice());
+    setProducts(dbProducts.slice());
+    // TODO: Andmebaasist kustutamine
   };
 
   const searchFromProducts = () => {
-    const result = productsFromFile.filter((product) =>
+    const result = dbProducts.filter((product) =>
       product.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()) ||
       product.description.toLowerCase().includes(searchedRef.current.value.toLowerCase()) ||
       product.id.toString().includes(searchedRef.current.value)

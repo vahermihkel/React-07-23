@@ -120,8 +120,14 @@ export default App;
 // Ostukorvis kujundus
 // Pakiautomaatide võtmine
 
-// 30.08
-// Andmebaas
+// 31.08
+// Andmebaas  --> failid, kuidas andmebaasi panna
 
 // 04.09
 // Makse - EveryPay
+// Kujundus - HomePage kui MaintainProducts
+// Loader
+// Kustutamine
+//--> kodus: Nortali proovitöö
+//        Java(back-end) + Angular(front-end)
+//        täpselt identselt üle Reacti

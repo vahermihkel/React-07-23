@@ -60,6 +60,27 @@ function Cart() {
     return sum.toFixed(2);
   };
 
+  const pay = () => {
+    const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
+    const paymentBody = {
+      "api_username": "e36eb40f5ec87fa2", // turvaelement
+      "account_name": "EUR3D1", // konto
+      "amount": summedPrice(), // tellimuse summa
+      "order_reference": Math.random() * 9999999, // tellimuse nr
+      "nonce": "a9b7f7e79n" + Math.random() * 9999999 + new Date(), // turvaelement
+      "timestamp": new Date(), // turvaelement
+      "customer_url": "https://err.ee" // kuhu tagasi suunatakse
+      };
+    const paymentHeaders = {
+      "Authorization": "Basic ZTM2ZWI0MGY1ZWM4N2ZhMjo3YjkxYTNiOWUxYjc0NTI0YzJlOWZjMjgyZjhhYzhjZA==",
+      "Content-Type": "application/json"
+    };
+
+    fetch(url, {method: "POST", body: JSON.stringify(paymentBody), headers: paymentHeaders})
+      .then(res => res.json())
+      .then(json => console.log(json));
+  }
+
   if (parcelMachines.length === 0) {
     return <div>Loading...</div>
   }
@@ -92,6 +113,7 @@ function Cart() {
         <div>
           <select>{parcelMachines.filter(pm => pm.A0_NAME === "EE").map(pm => <option key={pm.NAME}>{pm.NAME}</option> )}</select>  
           <div>Summary: {summedPrice()} $</div>
+          <button onClick={pay}>Maksma</button>
         </div>}
 
       {cart.length === 0 && <div>Cart is empty</div>}

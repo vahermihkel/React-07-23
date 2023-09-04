@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import productsFromFile from '../../data/products.json'
+// import productsFromFile from '../../data/products.json'
 import { useTranslation } from 'react-i18next';
- 
+import config from '../../data/config.json'
+
 function SingleProduct() {
   const {t} = useTranslation();
   const {productId} = useParams();
-  const found = productsFromFile.find(product => product.id === Number(productId));
+  const [products, setProducts] = useState([]);
+  const found = products.find(product => product.id === Number(productId));
+
+  useEffect(() => {
+    fetch(config.products)
+      .then(res => res.json())
+      .then(json => setProducts(json || []));
+  }, []);
  
   if (found === undefined)
   return <div>{t("notFound")} </div>

@@ -1,13 +1,12 @@
-import React, { useRef, useState } from 'react'
-import productsFromFile from "../../data/products.json";
+import React, { useEffect, useRef, useState } from 'react'
+// import productsFromFile from "../../data/products.json";
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import config from "../../data/config.json";
 
 function EditProduct() {
   const { productId } = useParams();        //    71579190  === "71579190"
-  const found = productsFromFile.find(product => product.id === Number(productId));
-  //EI KÄI: const found = productsFromFile[index]
   const idRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
@@ -17,6 +16,21 @@ function EditProduct() {
   const activeRef = useRef();
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const [idUnique, setIdUnique] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const found = products.find(product => product.id === Number(productId));
+  //EI KÄI: const found = productsFromFile[index]
+
+  useEffect(() => {
+    fetch(config.products)
+      .then(res => res.json())
+      .then(json => setProducts(json || []));
+
+    fetch(config.categories)
+      .then(res => res.json())
+      .then(json => setCategories(json || []));
+  }, []);
 
   const edit = () => {
     if (idRef.current.value === "") {
@@ -40,8 +54,8 @@ function EditProduct() {
       return;
     }
  
-    const index = productsFromFile.findIndex(product => product.id === Number(productId));
-    productsFromFile[index] = {
+    const index = products.findIndex(product => product.id === Number(productId));
+    products[index] = {
       "id": Number(idRef.current.value),
       "image": imageRef.current.value,
       "name": nameRef.current.value,
@@ -51,16 +65,18 @@ function EditProduct() {
       "active": activeRef.current.checked
     };
     navigate("/admin/maintain-products");
+    fetch(config.products , {
+      method: "PUT", 
+      body: JSON.stringify(products)
+    });
   }
-
-  const [idUnique, setIdUnique] = useState(true);
 
   const checkIdUniqueness = () => {
     if (idRef.current.value === productId) {
       setIdUnique(true);
       return;
     }
-    const index = productsFromFile.findIndex(product => product.id === Number(idRef.current.value));
+    const index = products.findIndex(product => product.id === Number(idRef.current.value));
     if (index === -1) {
       setIdUnique(true);
     } else {
@@ -84,7 +100,9 @@ function EditProduct() {
       <label>Image</label> <br />
       <input ref={imageRef} defaultValue={found.image} type="text" /> <br />
       <label>Category</label> <br />
-      <input ref={categoryRef} defaultValue={found.category} type="text" /> <br />
+      <select ref={categoryRef} defaultValue={found.category}>
+        {categories.map(category => <option key={category.name}>{category.name}</option> )}
+      </select><br />
       <label>Description</label> <br />
       <input ref={descriptionRef} defaultValue={found.description} type="text" /> <br />
       <label>Active</label> <br />

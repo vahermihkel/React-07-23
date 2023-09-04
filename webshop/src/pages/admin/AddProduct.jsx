@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
-import productsFromFile from "../../data/products.json";
+// import productsFromFile from "../../data/products.json";
+import config from "../../data/config.json";
 
 function AddProduct() {
   const nameRef = useRef();
@@ -13,6 +14,19 @@ function AddProduct() {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const {t} = useTranslation();
+  const [categories, setCategories] = useState([]);
+  const [idUnique, setIdUnique] = useState(true);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(config.products)
+      .then(res => res.json())
+      .then(json => setProducts(json || []));
+
+    fetch(config.categories)
+      .then(res => res.json())
+      .then(json => setCategories(json || []));
+  }, []);
 
   const addNewProduct = () => {
     if (idRef.current.value === "") {
@@ -40,7 +54,7 @@ function AddProduct() {
     //   toast.error(t("Tühja nimetusega ei saa toodet lisada!"));
     // } else {
       toast.success(t("success") + nameRef.current.value);
-      productsFromFile.push({
+      products.push({
         name: nameRef.current.value,
         id: Number(idRef.current.value),
         price: Number(priceRef.current.value),
@@ -57,6 +71,10 @@ function AddProduct() {
     categoryRef.current.value = "";
     descriptionRef.current.value = "";
     activeRef.current.checked = false;
+    fetch(config.products , {
+      method: "PUT", 
+      body: JSON.stringify(products)
+    });
   };
 
   // 2 aastat - 10 inimest tööl, 5 arendajat
@@ -70,10 +88,8 @@ function AddProduct() {
   //            hanke pakkumine - kõige parem proovitöö + kõige väiksem tunnihind
   // Disainer teeb Figmas arendajatele vaateid
 
-  const [idUnique, setIdUnique] = useState(true);
-
   const checkIdUniqueness = () => {
-    const index = productsFromFile.findIndex(product => product.id === Number(idRef.current.value));
+    const index = products.findIndex(product => product.id === Number(idRef.current.value));
     // const product = productsFromFile.find(product => product.id === Number(idRef.current.value));
     // const result = productsFromFile.filter(product => product.id === Number(idRef.current.value));
 
@@ -102,7 +118,10 @@ function AddProduct() {
       <input ref={pictureRef} type="text" />
       <br />
       <label>Product category</label> <br />
-      <input ref={categoryRef} type="text" />
+      {/* <input ref={categoryRef} type="text" /> */}
+      <select ref={categoryRef}>
+        {categories.map(category => <option key={category.name}>{category.name}</option> )}
+      </select>
       <br />
       <label>Product description</label> <br />
       <input ref={descriptionRef} type="text" />
