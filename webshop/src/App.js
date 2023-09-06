@@ -1,9 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
-
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { useTranslation } from 'react-i18next';
+import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import AdminHome from "./pages/admin/AdminHome";
@@ -20,43 +15,13 @@ import SingleProduct from "./pages/global/SingleProduct";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import NotFound from "./pages/global/NotFound";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
-  const { t, i18n } = useTranslation();
-
-  const changeLangEN = () => {
-    i18n.changeLanguage("en");
-    localStorage.setItem("language", "en");
-  }
-
-  const changeLangEE = () => {
-    i18n.changeLanguage("ee");
-    localStorage.setItem("language", "ee");
-  }
 
   return (
     <div className="App">
-      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand as={Link} to="/">Mihkel's webshop</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/admin">{t("nav.admin")}</Nav.Link>
-              <Nav.Link as={Link} to="/contact">{t("nav.contact")}</Nav.Link>
-              <Nav.Link as={Link} to="/shops">{t("nav.shops")}</Nav.Link>
-            </Nav>
-            <Nav>
-              <Nav.Link>
-                <img className="lang" onClick={changeLangEN} src="/english.png" alt="" />
-                <img className="lang" onClick={changeLangEE} src="/estonian.png" alt="" />
-              </Nav.Link>
-              <Nav.Link as={Link} to="/cart">{t("nav.cart")}</Nav.Link>
-              <Nav.Link as={Link} to="/login">{t("nav.login")}</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <NavigationBar />
 
       <Routes>
         <Route path="" element={<HomePage />} />
@@ -143,11 +108,13 @@ export default App;
 
 // 11.09  15.kohtumine
 // Vaatame koos Nortali proovitöö üle
+// FilterButtons KODUS, koos teeme Producti
+// Context ---> ostukorvi summas navigationBaris
 // Sisselogimise ja registreerumise juurde
-// Context
 
 // 14.09  16.kohtumine
 // Vaatame FE proovitööd
+// Sisselogimise-registreerumise jätk
 
 // 18.09 - uuendame koos kuupäeva, sest nii kiiresti ei jõua proovitööd valmis
 //  17.kohtumine

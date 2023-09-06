@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 // import cartFromFile from "../../data/cart.json"
 import config from "../../data/config.json"; 
 import styles from "../../css/HomePage.module.css";
-import { Spinner } from 'react-bootstrap';
-import CarouselGallery from '../../components/CarouselGallery';
+import { Button as BButton, Spinner } from 'react-bootstrap';
+import Button from '@mui/material/Button';
+import CarouselGallery from '../../components/home/CarouselGallery';
+import SortButtons from '../../components/home/SortButtons';
 // import "../../css/HomePage.module.css";
 
 function HomePage () {                        // .filter(product => product.active === true)
@@ -22,8 +24,8 @@ function HomePage () {                        // .filter(product => product.acti
     fetch(config.products)
       .then(res => res.json())
       .then(json => {
-        setProducts(json || []);
-        setDbProducts(json || []);
+        setProducts(json.slice() || []);
+        setDbProducts(json.slice() || []);
         setLoading(false);
       });
 
@@ -33,58 +35,8 @@ function HomePage () {                        // .filter(product => product.acti
   }, []);
 
   const reset = () => {
-    setProducts(dbProducts);
+    setProducts(dbProducts.slice());
   }
- 
-  const sortAZ = () => {
-    products.sort((a, b) => a.name.localeCompare(b.name));
-    setProducts(products.slice())
-  }
- 
-  const sortZA = () => {
-    products.sort((a, b) => b.name.localeCompare(a.name));
-    setProducts(products.slice())
-  }
- 
-  const sortPriceAsc = () => {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice())
-  }
- 
-  const sortPriceDesc = () => {
-    products.sort((a, b) => b.price - a.price);
-    setProducts(products.slice())
-  }
- 
-  // const filterMemoryBank = () => {
-  //   const result = products.filter(product => product.category === "memory bank")
-  //   setProducts(result)
-  // }
- 
-  // const filterUSBDrive = () => {
-  //   const result = products.filter(product => product.category === "usb drive")
-  //   setProducts(result)
-  // }
-
-  // const filterGold = () => {
-  //   const compare = products.filter(product => product.category === "gold");
-  //   setProducts(compare);
-  // }
-
-  // const filterCoin = () => {
-  //   const compare = products.filter(product => product.category === "coin");
-  //   setProducts(compare);
-  // }
-
-  // const filterGoldTester = () => {
-  //   const compare = products.filter(product => product.category === "gold tester");
-  //   setProducts(compare);
-  // }
-
-  // const filterBracelet = () => {
-  //   const compare = products.filter(product => product.category === "bracelet");
-  //   setProducts(compare);
-  // }
 
   const filterByCategory = (categoryClicked) => {
     const result = dbProducts.filter(product => product.category === categoryClicked);
@@ -118,14 +70,11 @@ function HomePage () {                        // .filter(product => product.acti
       <div> {t("ttlProd")} {products.length} {t("pcs")} </div>
       <button onClick={reset}>Reset</button>
       <br /> 
-      <button onClick={() => sortAZ()}>{t("sortAZ")} </button>
-      <button onClick={() => sortZA()}>{t("sortZA")}</button>
-      <button onClick={() => sortPriceAsc()}>{t("sortPA")}</button>
-      <button onClick={() => sortPriceDesc()}>{t("sortPD")}</button>
+      <SortButtons 
+          products={products}
+          setProducts={setProducts}
+        />
       <br /> <br />
-      {/* <button onClick={() => filterByCategory("memory bank")}>{t("memory bank")}</button>
-      <button onClick={() => filterByCategory("usb drive")}>{t("usb drive")}</button>
-      <button onClick={() => filterByCategory("gold")}>Filter gold</button> */}
       {categories.map(category => <button key={category.name} onClick={() => filterByCategory(category.name)}>{t(category.name)}</button>)}
       <br /> <br/>
  
@@ -135,9 +84,9 @@ function HomePage () {                        // .filter(product => product.acti
           <img src={product.image} alt="" />
           <div className={styles.name}> {product.name} </div>
           <div> {product.price.toFixed(2)} €</div>
-          <button onClick={() => addCart(product)}>{t("addCart")}</button>
+          <Button variant="contained" onClick={() => addCart(product)}>{t("addCart")}</Button>
           <Link to={"/product/" + product.id}>
-            <button>{t("lookCloser")} </button>
+            <BButton>{t("lookCloser")} </BButton>
           </Link>
         </div>
         ))}
