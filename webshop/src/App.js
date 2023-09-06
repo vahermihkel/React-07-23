@@ -132,7 +132,7 @@ export default App;
 //        Java(back-end) + Angular(front-end)
 //        täpselt identselt üle Reacti
 
-// 06.09
+// 06.09  14. kohtumine
 // Korra uurin Nortali proovitöö osas
 // Kustutamine
 // Editimise anomaalia
@@ -140,3 +140,17 @@ export default App;
 // Karusell-galerii Bootstrapist
 // CSS moodulite jätk
 // Komponendid
+
+// 11.09  15.kohtumine
+// Vaatame koos Nortali proovitöö üle
+// Sisselogimise ja registreerumise juurde
+// Context
+
+// 14.09  16.kohtumine
+// Vaatame FE proovitööd
+
+// 18.09 - uuendame koos kuupäeva, sest nii kiiresti ei jõua proovitööd valmis
+//  17.kohtumine
+// Tic-tac toe proovitöö
+
+// 28.09  18.kohtumine

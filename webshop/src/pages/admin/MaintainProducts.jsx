@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 import config from "../../data/config.json";
-import "../../css/MaintainProducts.css";
+import styles from "../../css/MaintainProducts.module.css";
 
 function MaintainProducts() {
   const [products, setProducts] = useState([]);
@@ -22,11 +22,18 @@ function MaintainProducts() {
       });
   }, []);
 
-  const deleteProduct = (index) => {
-    dbProducts.splice(index, 1);
-    toast.warn(t("itemRemoved"));
-    setProducts(dbProducts.slice());
-    // TODO: Andmebaasist kustutamine
+            // siia tuleb järjekorranumber -> number 2 kui on otsingus
+            // aga kustutab ära andmebaasi toodetest järjekorraga number 2
+  const deleteProduct = (productId) => {
+    const index = dbProducts.findIndex(product => product.id === productId);
+    dbProducts.splice(index, 1); // 603 toodet -> pean nende seast kustutama
+    fetch(config.products , {
+      method: "PUT", 
+      body: JSON.stringify(dbProducts)
+    }).then(() => {
+      toast.warn(t("itemRemoved"));
+      searchFromProducts();
+    })
   };
 
   const searchFromProducts = () => {
@@ -56,8 +63,8 @@ function MaintainProducts() {
         </thead>
         {/* table head, table body, th - table header, td - table data, tr - table row */}
         <tbody>
-          {products.map((product, index) => (
-            <tr key={product.id} className={ product.active ? "active" : "inactive" }>
+          {products.map(product => (
+            <tr key={product.id} className={ product.active ? styles.active : styles.inactive }>
               <td><img src={product.image} alt="" /></td>
               <td>{product.id}</td>
               <td>{product.name}</td>
@@ -65,7 +72,7 @@ function MaintainProducts() {
               <td>{product.category}</td>
               <td>{product.description}</td>
               <td>
-                <button onClick={() => deleteProduct(index)}>{t("delete")}</button>
+                <button onClick={() => deleteProduct(product.id)}>{t("delete")}</button>
                 <Button as={Link} to={"/admin/edit-product/" + product.id}>
                   edit
                 </Button>

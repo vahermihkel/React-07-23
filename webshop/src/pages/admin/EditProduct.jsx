@@ -64,11 +64,10 @@ function EditProduct() {
       "category": categoryRef.current.value,
       "active": activeRef.current.checked
     };
-    navigate("/admin/maintain-products");
     fetch(config.products , {
       method: "PUT", 
       body: JSON.stringify(products)
-    });
+    }).then(() => navigate("/admin/maintain-products"));
   }
 
   const checkIdUniqueness = () => {

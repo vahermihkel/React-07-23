@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import cartFile from "../../data/cart.json";
 import { ToastContainer, toast } from "react-toastify";
-import "../../css/Cart.css";
+import styles from "../../css/Cart.module.css";
 
 function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
@@ -97,17 +97,17 @@ function Cart() {
       {cart.length > 0 && <button onClick={removeAll}>Remove all</button>}
       {cart.length > 0 && <div>Added products: {cart.length}</div>}
       {cart.map((cartProduct, index) => (
-        <div className="product" key={index}>
-          <img className="image" src={cartProduct.product.image} alt="" /> <br />
-          <div className="name">{cartProduct.product.name}</div>
-          <div className="price">{cartProduct.product.price.toFixed(2)} €</div>
-          <div className="quantity">
-            <img src="/minus.png" alt="" className="button" onClick={() => decreaseQuantity(index)} />
+        <div className={styles.product} key={index}>
+          <img className={styles.image} src={cartProduct.product.image} alt="" /> <br />
+          <div className={styles.name}>{cartProduct.product.name}</div>
+          <div className={styles.price}>{cartProduct.product.price.toFixed(2)} €</div>
+          <div className={styles.quantity}>
+            <img src="/minus.png" alt="" className={styles.button} onClick={() => decreaseQuantity(index)} />
             <div>{cartProduct.quantity} tk</div>
-            <img src="/plus.png" alt="" className="button" onClick={() => increaseQuantity(index)} />
+            <img src="/plus.png" alt="" className={styles.button} onClick={() => increaseQuantity(index)} />
           </div>
-          <div className="total">{(cartProduct.product.price * cartProduct.quantity).toFixed(2)} €</div>
-          <img src="/remove.png" alt="" className="button" onClick={() => removeItem(index)} />
+          <div className={styles.total}>{(cartProduct.product.price * cartProduct.quantity).toFixed(2)} €</div>
+          <img src="/remove.png" alt="" className={styles.button} onClick={() => removeItem(index)} />
         </div>
       ))}
       <ToastContainer
@@ -117,7 +117,8 @@ function Cart() {
       />
 
       {cart.length > 0 && 
-        <div>
+        // <div className={styles["cart-bottom"]}>
+        <div className={styles.cart__bottom}>
           <select>{parcelMachines.filter(pm => pm.A0_NAME === "EE").map(pm => <option key={pm.NAME}>{pm.NAME}</option> )}</select>  
           <div>Summary: {summedPrice()} $</div>
           <button onClick={pay}>Maksma</button>

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import config from "../../data/config.json"; 
 import styles from "../../css/HomePage.module.css";
 import { Spinner } from 'react-bootstrap';
+import CarouselGallery from '../../components/CarouselGallery';
 // import "../../css/HomePage.module.css";
 
 function HomePage () {                        // .filter(product => product.active === true)
@@ -113,6 +114,7 @@ function HomePage () {                        // .filter(product => product.acti
  
   return (
     <div>
+      <CarouselGallery />
       <div> {t("ttlProd")} {products.length} {t("pcs")} </div>
       <button onClick={reset}>Reset</button>
       <br /> 
