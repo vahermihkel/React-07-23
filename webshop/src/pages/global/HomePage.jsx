@@ -62,7 +62,7 @@ function HomePage() {
       <br /> <br />
       <div className={styles.products}>
         {products.map((product) => (
-          <Product product={product} />
+          <Product key={product.id} product={product} />
         ))}
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
