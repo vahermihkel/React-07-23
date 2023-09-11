@@ -25,7 +25,7 @@ function App() {
 
       <Routes>
         <Route path="" element={<HomePage />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="cart" element={<Cart  />} />
         <Route path="contact" element={<ContactUs />} />
         <Route path="shops" element={<Shops />} />
         <Route path="product/:productId" element={<SingleProduct />} />
@@ -116,8 +116,10 @@ export default App;
 // Vaatame FE proovitööd
 // Sisselogimise-registreerumise jätk
 
-// 18.09 - uuendame koos kuupäeva, sest nii kiiresti ei jõua proovitööd valmis
-//  17.kohtumine
+// 20.09 - uuendame koos kuupäeva, sest nii kiiresti ei jõua proovitööd valmis
 // Tic-tac toe proovitöö
 
-// 28.09  18.kohtumine
+// 27.09 - 10.00-11.30
+// Trinidad Wiseman proovitöö 10.00-11.30
+
+// 04.10  18.kohtumine 10.00-11.30
